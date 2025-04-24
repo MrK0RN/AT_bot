@@ -5,7 +5,6 @@ import base64
 from bs4 import BeautifulSoup
 import re
 
-
 def get_mails():
     lines = []
     mails = []
@@ -34,17 +33,40 @@ class reader:
         with MailBox(self.imap_server, port=993).login(username, mail_pass) as mailbox:
             for msg in mailbox.fetch():
                 if msg.from_ == "no-reply@author.today":
+                    print(username)
                     soup = BeautifulSoup(msg.html).prettify()
                     r = re.search(r"https://author.today/account/confirmEmail\S*\"", soup).group()[:-1]
-                    return r
+                    print(r)
+                    return username, r
 
+
+    def delete_mails(self, username, mail_pass):
+        with MailBox(self.imap_server, port=993).login(username, mail_pass) as mailbox:
+            uids = []
+            for msg in mailbox.fetch():
+                if msg.from_ == "no-reply@author.today":
+                    print("######")
+                    uids.append(msg.uid)
+            mailbox.delete(uids)
 
 def get_links():
     mp = get_mails()
-    res = []
+    res = {}
     for i in mp:
         readerT = reader()
-        res.append(readerT.read_mails(i[0], i[1]))
+        g = readerT.read_mails(i[0], i[1])
+        if g:
+            h, k = g
+            res[h] = k
     return res
+
+def delete_links():
+    mp = get_mails()
+    res = {}
+    for i in mp:
+        readerT = reader()
+        g = readerT.delete_mails(i[0], i[1])
+
+delete_links()
 
 
