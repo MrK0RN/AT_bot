@@ -1,36 +1,24 @@
-import json
-
-import driver
 import login
+import support.data_operate
 from data import read_mail
 from support import timer
 
-
 def save_links():
     g = read_mail.get_links()
+
     print("ready")
-    with open("../temp/autLinks.json", "w") as f:
-        json.dump(g, f)
+    support.data_operate.load_links(g)
 
 #save_links()
-
-with open("../temp/autLinks.json", "r") as f:
-    g = json.load(f)
-    print(type(g))
-
-print(g)
-driver = driver.Driver()
-driver.driver_start()
-h = {}
-with open("../temp/accs", "r") as f:
-    lines = f.read().split("\n")
-for i in lines:
-    print(i)
-    z = i.split("|")
-    h[z[1]] = z[2]
-for i in g:
-    driver.driver.get(g[i])
-    timer.sleep(1)
-    login.clear_login(driver.driver, (i, h[i]), mail=True)
-    timer.sleep(1)
+def auth_links():
+    import driver
+    driver = driver.Driver()
+    driver.driver_start()
+    g = support.data_operate.parse_links()
+    for i in g:
+        driver.driver.get(g[i][1])
+        timer.sleep(1)
+        z = support.data_operate.parse_links(g[i][0])
+        login.clear_login(driver.driver, (i, z[1]), mail=True)
+        timer.sleep(1)
 

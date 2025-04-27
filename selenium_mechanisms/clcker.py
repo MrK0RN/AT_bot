@@ -9,4 +9,4 @@ def clicker(driver, by, value, wait, input=None):
     else:
         print("Такого элемента не найдено!!")
     if input:
-        printer()
+        printer(input)

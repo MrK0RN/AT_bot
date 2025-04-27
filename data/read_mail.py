@@ -55,6 +55,7 @@ def get_links():
     res = {}
     for i in mailpassword:
         g = readerT.read_mails(i[0], i[1])
+        print("!")
         if g:
             mail, link = g
             res[mail] = link

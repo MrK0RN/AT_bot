@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium_stealth import stealth
 
-
 class Driver:
 
     def __init__(self):
+        print(1)
         self.driver = None
-
         self.user_agent = self.set_user_agent()
+        print(1)
         self.languages = self.set_languages()
+        print(1)
         self.vendor = self.set_vendor()
         self.platform = self.set_platform()
         self.webgl_vendor = self.set_webgl_vendor()
         self.renderer = self.set_renderer()
         self.fix_hairline = self.set_fixhairline()
         self.run_on_insecure_origins = self.set_run_on_insecure_origins()
+        print(1)
         self.driver_status = "off"
 
     def set_user_agent(self):

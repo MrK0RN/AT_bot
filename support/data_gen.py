@@ -1,11 +1,11 @@
 from support.passw_gen import gen as genh
 from mimesis import Person
-import data_operate
+from support.data_operate import give_unused_email
 
 person = Person('ru')
 
 def gen():
     fio = person.full_name()
     passw = genh(8)
-    email = data_operate.give_unused_email()
+    email = give_unused_email()
     return fio, email, passw
