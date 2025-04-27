@@ -1,7 +1,5 @@
 from imap_tools import MailBox, AND
 
-from email.header import decode_header
-import base64
 from bs4 import BeautifulSoup
 import re
 
@@ -23,12 +21,12 @@ class reader:
         lines = []
         mails = []
         mp = []
-        with open("accs", "r") as f:
+        with open("../temp/accs", "r") as f:
             lines = f.read().split("\n")
         for i in lines:
             print(i)
             mails.append(i.split("|")[1])
-        with open("mails/mails", "r") as f:
+        with open("../temp/mails/mails", "r") as f:
             lines = f.read().split("\n")
         for i in lines:
             j = i.split("|")

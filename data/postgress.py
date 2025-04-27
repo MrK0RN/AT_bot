@@ -30,3 +30,12 @@ class Pg8000DB:
 
     def close(self):
         self.conn.close()
+
+
+def usual_db():
+    db_user = "alexanderkrasnykh"
+    db_password = ""
+    db_name = "at"
+    db_port = "5436"
+    db_host = "127.0.0.1"
+    return Pg8000DB(db_name, db_user, db_password, db_host, db_port)

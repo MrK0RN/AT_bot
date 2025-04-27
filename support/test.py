@@ -1,4 +1,4 @@
-import postgress
+from data import postgress
 
 db = postgress.Pg8000DB("postgres", "alexanderkrasnykh", "")
 print("23e23e3e134134134")

@@ -1,6 +1,6 @@
 import requests
 import config
-from message import message
+from data.message import message
 
 
 class mailtm:

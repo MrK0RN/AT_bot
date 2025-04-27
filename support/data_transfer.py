@@ -1,4 +1,6 @@
 #mail transfer
+from support.data_operate import create_account
+
 
 def base_mail_transfer(db, dir="mails", domen="@rambler.ru"):
     with open(dir+"/mails", "r") as f:
@@ -14,14 +16,8 @@ def base_mail_transfer(db, dir="mails", domen="@rambler.ru"):
         db.execute(query)
 
 def account_transfer(db):
-    with open("accs", "r") as f:
+    with open("../temp/accs", "r") as f:
         accs = f.read().split("\n")
-
     for acc in accs:
         acc_s = acc.split("|")
-
-        query = f'SELECT password FROM mails WHERE mail=\'{acc_s[1]}\''
-        g = db.execute(query, fetch=True)
-        query = f'INSERT INTO accounts (name, email, acc_password, email_password) VALUES (\'{acc_s[0]}\', \'{acc_s[1]}\', \'{acc_s[2]}\', \'{g[0][0]}\')'
-        print(query)
-        db.execute(query)
+        create_account(acc_s[0], acc_s[1], acc_s[2])

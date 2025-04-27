@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium_stealth import stealth
-from selenium.webdriver.common.by import By
-import time
+
 
 class Driver:
 

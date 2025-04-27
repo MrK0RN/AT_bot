@@ -1,4 +1,4 @@
-import data_transfer
+from support import data_transfer
 
 db_user = "alexanderkrasnykh"
 db_password = ""
@@ -6,10 +6,10 @@ db_name = "alexanderkrasnykh"
 db_port = "5436"
 db_host = "127.0.0.1"
 
-from postgress import Pg8000DB
+from data.postgress import Pg8000DB
 
 def sql(db_user, db_password, db_name, db_port):
-    with open("all.sql", "r") as f:
+    with open("data/all.sql", "r") as f:
         queries = f.read().split("\n")
 
     db = Pg8000DB(user=db_user, password=db_password, database=db_name, port=db_port, host=db_host)
